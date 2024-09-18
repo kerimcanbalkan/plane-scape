@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
+import {Open_Sans} from "next/font/google";
+import Navigation from "@/components/Navigation"
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Plane Scope",
   description: "App for booking flights",
 };
+
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  weight:['400','700']
+})
 
 export default function RootLayout({
   children,
@@ -14,9 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased`}
+        className={`antialiased ${openSans.className}`}
       >
-        {children}
+        <div className="container mx-auto">
+          <Navigation/> 
+          {children}
+        </div>
       </body>
     </html>
   );
