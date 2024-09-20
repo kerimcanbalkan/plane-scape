@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
@@ -12,21 +11,35 @@ type Props = {
   className?: string;
   options: Option[];
   placeholder?: string;
-  icon: IconDefinition;
+  icon?: IconDefinition;
+  onChange: (value: string) => void;
 };
 
-export default function CustomSelect({ className = "", placeholder = "", options, icon }: Props) {
-  const [inputValue, setInputValue] = useState("");
-  const [selected, setSelected] = useState("");
-  const [open, setOpen] = useState(false);
+export default function CustomSelect({
+  className = "",
+  placeholder = "",
+  options,
+  icon,
+  onChange,
+}: Props) {
+  const [inputValue, setInputValue] = useState<string>("");
+  const [selected, setSelected] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleSelect = (label: string, value: string) => {
+    setSelected(label);
+    setOpen(false);
+    setInputValue("");
+    onChange(value);
+  };
 
   return (
-    <div className="relative w-48 max-h-5 text-sm"> 
+    <div className="relative w-48 max-h-5 text-sm">
       <div
         onClick={() => setOpen(!open)}
-        className={`bg-white w-full p-2 flex items-center gap-3 border-2 border-gray-300 text-sm ${className}`}
+        className={`bg-white w-full min-h-4 p-2 flex items-center gap-3 border-2 border-gray-300 text-sm cursor-pointer ${className}`}
       >
-        <FontAwesomeIcon icon={icon} className="text-primary z-40" />
+        {icon && <FontAwesomeIcon icon={icon} className="text-primary z-40" />}
         {selected
           ? selected.length > 25
             ? selected.substring(0, 25) + "..."
@@ -37,29 +50,24 @@ export default function CustomSelect({ className = "", placeholder = "", options
         className={`absolute top-full left-0 bg-white w-full z-10 border-b-2 border-r-2 border-l-2 border-gray-300 ${
           open ? "max-h-60" : "hidden"
         } overflow-y-auto`}
-      > {/* Set the position to absolute, top-full to place it below the input, and z-index to bring it above */}
+      >
         <div className="flex items-center px-2 sticky top-0 bg-white">
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value.toLowerCase())}
             placeholder="Search"
-            className="placeholder:text-gray-400 outline-none text-sm py-2"
+            className="placeholder:text-gray-400 outline-none text-sm py-4 w-full"
           />
         </div>
         {options.map((option: Option) => (
           <li
             key={option.value}
-            className={`p-2 text-sm hover:bg-sky-600 hover:text-white ${
-              option.label.toLowerCase() === selected.toLowerCase() && "bg-sky-600 text-white"
+            className={`p-2 text-sm hover:bg-sky-600 hover:text-white cursor-pointer ${
+              option.label.toLowerCase() === selected.toLowerCase() &&
+              "bg-sky-600 text-white"
             } ${option.label.toLowerCase().startsWith(inputValue) ? "block" : "hidden"}`}
-            onClick={() => {
-              if (option.value.toLowerCase() !== selected.toLowerCase()) {
-                setSelected(option.label);
-                setOpen(false);
-                setInputValue("");
-              }
-            }}
+            onClick={() => handleSelect(option.label, option.value)} // Set selected and trigger onChange
           >
             {option.label}
           </li>
