@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-
-type Option = {
-  value: string;
-  label: string;
-};
+export interface Option  { value: string; label: string; };
 
 type Props = {
   className?: string;
   options: Option[];
   placeholder?: string;
   icon?: IconDefinition;
-  onChange: (value: string) => void;
+  onChange: (label:string, value: string) => void;
+  selected?: string;
 };
 
 export default function CustomSelect({
@@ -21,53 +18,52 @@ export default function CustomSelect({
   options,
   icon,
   onChange,
+  selected="",
 }: Props) {
   const [inputValue, setInputValue] = useState<string>("");
-  const [selected, setSelected] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
 
   const handleSelect = (label: string, value: string) => {
-    setSelected(label);
     setOpen(false);
     setInputValue("");
-    onChange(value);
+    onChange(label,value);
   };
 
   return (
     <div className="relative w-48 max-h-5 text-sm">
       <div
         onClick={() => setOpen(!open)}
-        className={`bg-white w-full min-h-4 p-2 flex items-center gap-3 border-2 border-gray-300 text-sm cursor-pointer ${className}`}
+        className={`bg-white w-full min-h-6 p-2 flex items-center gap-3 border-2 border-gray-300 text-sm cursor-pointer z-50 ${className}`}
       >
         {icon && <FontAwesomeIcon icon={icon} className="text-primary z-40" />}
         {selected
-          ? selected.length > 25
-            ? selected.substring(0, 25) + "..."
+          ? selected.length > 15
+            ? selected.substring(0, 15) + "..."
             : selected
           : placeholder}
       </div>
       <ul
         className={`absolute top-full left-0 bg-white w-full z-10 border-b-2 border-r-2 border-l-2 border-gray-300 ${
-          open ? "max-h-60" : "hidden"
-        } overflow-y-auto`}
+open ? "max-h-60" : "hidden"
+} overflow-y-auto`}
       >
-        <div className="flex items-center px-2 sticky top-0 bg-white">
+        <div className="flex items-center p-2 sticky top-0 bg-white">
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value.toLowerCase())}
             placeholder="Search"
-            className="placeholder:text-gray-400 outline-none text-sm py-4 w-full"
+            className="placeholder:text-gray-400 outline-none text-sm  w-full z-10 mt-6"
           />
         </div>
         {options.map((option: Option) => (
           <li
             key={option.value}
-            className={`p-2 text-sm hover:bg-sky-600 hover:text-white cursor-pointer ${
-              option.label.toLowerCase() === selected.toLowerCase() &&
-              "bg-sky-600 text-white"
-            } ${option.label.toLowerCase().startsWith(inputValue) ? "block" : "hidden"}`}
-            onClick={() => handleSelect(option.label, option.value)} // Set selected and trigger onChange
+            className={`p-2 text-sm hover:bg-primary hover:text-white cursor-pointer ${
+option.label.toLowerCase() === selected.toLowerCase() &&
+"bg-primary text-white"
+} ${option.label.toLowerCase().startsWith(inputValue) ? "block" : "hidden"}`}
+            onClick={() => handleSelect(option.label, option.value)} 
           >
             {option.label}
           </li>

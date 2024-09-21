@@ -8,9 +8,9 @@ export default function Navigation(){
         <div className="p-3 flex justify-between">
            <Link href="/"><Logo/></Link> 
             <ul className="flex gap-3 items-center">
-                <Link href="#Deals"><li className="flex items-center gap-2"><FontAwesomeIcon icon={faTag} className="text-primary w-5" /> Deals</li></Link>
-                <Link href="#Discover"><li className="flex items-center gap-2"><FontAwesomeIcon icon={faGlobe} className="text-primary w-5" /> Discover</li></Link>
-                <Link href="#Profile"><li className="flex items-center gap-2"><FontAwesomeIcon icon={faCircleUser} className="text-primary w-8" /> Jon Doe</li></Link>
+                <Link href="#Deals"><li className="flex items-center gap-2"><FontAwesomeIcon icon={faTag} className="text-primary" /> Deals</li></Link>
+                <Link href="#Discover"><li className="flex items-center gap-2"><FontAwesomeIcon icon={faGlobe} className="text-primary" /> Discover</li></Link>
+                <Link href="#Profile"><li className="flex items-center gap-2"><FontAwesomeIcon icon={faCircleUser} className="text-primary" />Jon Doe</li></Link>
             </ul>
         </div>
     )
