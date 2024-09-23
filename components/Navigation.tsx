@@ -10,7 +10,7 @@ export default function Navigation(){
             <ul className="flex gap-3 items-center">
                 <Link href="#Deals"><li className="flex items-center gap-2"><FontAwesomeIcon icon={faTag} className="text-primary" /> Deals</li></Link>
                 <Link href="#Discover"><li className="flex items-center gap-2"><FontAwesomeIcon icon={faGlobe} className="text-primary" /> Discover</li></Link>
-                <Link href="#Profile"><li className="flex items-center gap-2"><FontAwesomeIcon icon={faCircleUser} className="text-primary" />Jon Doe</li></Link>
+                <Link href="#Profile"><li className="flex items-center gap-2"><FontAwesomeIcon icon={faCircleUser} className="text-primary text-2xl" />Jon Doe</li></Link>
             </ul>
         </div>
     )

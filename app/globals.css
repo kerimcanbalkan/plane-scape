@@ -20,3 +20,12 @@ body {
     text-wrap: balance;
   }
 }
+
+.custom-scroll::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar in WebKit browsers (Chrome, Safari) */
+}
+
+.custom-scroll {
+  -ms-overflow-style: none; /* Hides scrollbar in Internet Explorer and Edge */
+  scrollbar-width: none; /* Hides scrollbar in Firefox */
+}
