@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 
+// Since api does not allow querying with city name or something similar. I could not figure a way around to fetch all destinations
 export async function GET() {
   const res = await axios.get(
     `https://api.schiphol.nl/public-flights/destinations?page=93&sort=city`,

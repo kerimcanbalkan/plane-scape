@@ -6,8 +6,8 @@ import CustomButton from "./CustomButton";
 interface Props {
     className?: string,
     text: string,
-    open: boolean,
-    setOpen: (value: boolean) => void; // Add this prop to control modal visibility
+    open: boolean, // default state 
+    setOpen: (value: boolean) => void; // property to control modal visibility
 }
 
 export default function WarningModal({ text, className = "", open, setOpen }: Props) {
