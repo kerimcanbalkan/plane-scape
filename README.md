@@ -17,10 +17,10 @@ _Home Page: Select your destination and departure time._
 ![Flight Listing](./public/screenshots/booking.png)  
 _Flight Listing: View available flights based on your selection._
 
-![Booked Flights](./public/screenshots/booking.png)  
+![Booked Flights](./public/screenshots/booked.png)  
 _List Booked Flights: View Booked flights._
 
-![Filter Booked Flights](./public/screenshots/booking.png)  
+![Filter Booked Flights](./public/screenshots/filtering.png)  
 _Filter Booked Flights_
 
 ## Getting Started
