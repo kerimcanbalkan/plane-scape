@@ -22,7 +22,7 @@ export default function FlightCard({flightData, className="", button=true}:Props
     const [bookingError, setBookingError] = useState<boolean>(false);
 
     return (
-        <div className={`bg-white rounded-lg mt-5${className}`}>
+        <div className={`bg-white rounded-lg mt-5 ${className}`}>
             <div className="p-8" >
                 <div className="flex justify-between">
                     <h1 className="font-extrabold text-xl mb-4">{`${flightData.departureCity} - ${flightData.destinationCity}`}</h1>

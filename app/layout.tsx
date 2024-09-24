@@ -3,8 +3,6 @@ import {Open_Sans} from "next/font/google";
 import Navigation from "@/components/Navigation"
 import "./globals.css";
 
-import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
-
 export const metadata: Metadata = {
   title: "Plane Scope",
   description: "App for booking flights",

@@ -2,21 +2,32 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 
 export async function POST(request: Request) {
+  // Parse the incoming request body
   const body = await request.json();
-  let {departure, destination, departureDate} = body;
+
+  // Extract necessary values for the Schipol Api
+  let {destination, departureDate} = body;
   
-  const data = await getFlights(departure, destination, departureDate)
+  // Fetch flight data
+  const data = await getFlights(destination, departureDate)
   return Response.json({data});
 }
 
-async function getFlights(departure:string, destination:string, departureDate:string){
+// Helper function to fetch flights from the Schiphol API
+async function getFlights(destination:string, departureDate:string){
+  // Encode the departureDate for the API request 
   const fromDateTime = encodeURIComponent(departureDate.slice(0,19));
+
+  // Create a new date object and set the time to the end of the day (23:59)
   const to = new Date(departureDate);
   to.setHours(23,59);
+
+  // Encode the end of the day for the API request 
   const toDateTime = encodeURIComponent(to.toISOString().slice(0,19));
 
   const url = `https://api.schiphol.nl/public-flights/flights?flightDirection=D&route=${destination}&includedelays=false&page=0&sort=%2BscheduleTime&fromDateTime=${fromDateTime}&toDateTime=${toDateTime}`;
 
+  // Make the GET request to the Schiphol API with the appropriate headers
   const res = await axios.get(
     url,
     {

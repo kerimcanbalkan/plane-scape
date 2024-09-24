@@ -13,7 +13,7 @@ interface FlightData {
 }
 
 export default function Home() {
-  const [flightData, setFlightData] = useState<FlightData[]>([]);// for flight data coming from the bookingCard
+  const [flightData, setFlightData] = useState<FlightData[]>([]);
   const [warning, setWarning] = useState<boolean>(false);// for opening the modal
 
   const handleBookingSubmit = (data:FlightData[]) => {
@@ -28,9 +28,9 @@ export default function Home() {
       <div className="w-full flex">
 
         {/*Booking flight section*/}
-        <div id="booking" className="w-[80%]">
+        <div id="booking" className="w-full m-2 lg:m-0 lg:w-[80%]">
           <BookingCard onSubmit={handleBookingSubmit} />
-          <div className="overflow-y-auto flex flex-col max-h-[60vh] w-3/4 custom-scroll">
+          <div className="overflow-y-auto flex flex-col max-h-[60vh] w-full sm:w-3/4 custom-scroll">
             {flightData.length > 0 && flightData.map((flight, index) => (
               <FlightCard key={index} flightData={flight.flightData} />
             ))}
@@ -38,7 +38,7 @@ export default function Home() {
         </div>
 
         {/*Card navigation at the right side*/}
-        <CardNavigation className="w-[20%]"/>
+        <CardNavigation className="w-[20%] hidden lg:flex"/>
       </div>
 
       {/*Modal for error displaying*/}

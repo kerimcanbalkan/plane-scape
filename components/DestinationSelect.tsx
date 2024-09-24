@@ -6,6 +6,7 @@ import axios from 'axios';
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Option } from './CustomSelect';
 
+// Structure of the destination data coming from the api
 export interface Destination {
   city: string;
   country: string;
@@ -23,6 +24,7 @@ type Props = {
   selected: string
 }
 
+// This component fetches destination data from an API and formats it for use with the CustomSelect component.
 export default function DestinationSelect  ({className="",  placeholder="", icon, onChange, selected=""}:Props)  {
     const [destinations, setDestinations] = useState<Option[]>([]);
     // Fetch the destinations

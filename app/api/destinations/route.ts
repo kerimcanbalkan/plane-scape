@@ -13,7 +13,7 @@ export async function GET() {
       }
     }
   );
-
+  // Extract destinations from the response data
   const data = res.data.destinations;
 
   return Response.json({data});

@@ -13,7 +13,7 @@ type Props = {
 };
 
 
-
+// Custom button for opening datepicker
 const CustomInput = forwardRef<HTMLDivElement, any>(
   ({ value, onClick, className, disabled }, ref) => (
     <div

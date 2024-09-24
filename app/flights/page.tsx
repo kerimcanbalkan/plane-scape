@@ -43,7 +43,7 @@ export default function Page() {
       <h1 className="font-bold text-2xl mb-5">Booked Flights</h1>
       
       {/* Filters and Sort Inputs */}
-      <div className="flex gap-5 mb-5">
+      <div className="flex flex-wrap gap-5 mb-5">
         {/* Filter by City */}
         <input 
           type="text" 
@@ -65,7 +65,7 @@ export default function Page() {
       </div>
 
       {/* Flights Display */}
-      <div className="flex flex-col w-3/4">
+      <div className="flex flex-col w-full sm:w-3/4">
         {filteredFlights.length > 0 ? (
           filteredFlights.map((flight, index) => (
             <FlightCard key={index} flightData={flight} className="" button={false}/>

@@ -29,7 +29,6 @@ export default function BookingCard({onSubmit, className=""}:Props) {
         }
 
         let requestData = {
-            departure: departure.value,
             destination: destination.value,
             departureDate,
         };
@@ -54,19 +53,17 @@ export default function BookingCard({onSubmit, className=""}:Props) {
 
     return (
         <div>
-        <form onSubmit={handleSubmit} className={`bg-white p-8 rounded-md ${className}`}>
-            <div className="mb-6 flex justify-between">
-                <h2 className="flex items-center gap-2 font-bold text-md">
-                    <FontAwesomeIcon icon={faPlane} className="w-5" />BOOK YOUR FLIGHT <span className="text-sm opacity-75">from</span> SCHIPOL
+        <form onSubmit={handleSubmit} className={`bg-white p-8 rounded-md w-full ${className}`}>
+                <h2 className="flex items-center gap-2 font-bold text-md mb-6 ">
+                    <FontAwesomeIcon icon={faPlane} className="w-3 sm:w-5" />BOOK YOUR FLIGHT<span className="text-sm opacity-75">from</span>SCHIPOL
                 </h2>
-            </div>
             {/*Input section*/}
-            <div className="flex flex-wrap justify-between">
+            <div className="flex flex-wrap justify-around sm:justify-between lg:justify-start">
                 <div className="flex gap-1 mb-6">
-                    <div className="rounded-l-full bg-white h-8 p-2 flex items-center border-2 border-gray-300 text-sm"><FontAwesomeIcon icon={faPlaneDeparture} className="text-primary w-5 mr-3" />{departure.label}</div>
+                    <div className="rounded-l-full bg-white h-8 p-2 flex items-center border-2 border-gray-300 text-xs sm:text-sm"><FontAwesomeIcon icon={faPlaneDeparture} className="text-primary w-5 mr-3" /><span className="whitespace-pre">{departure.label}</span></div>
 
                     <DestinationSelect
-                        className="rounded-r-full h-8"
+                        className="rounded-r-full h-8 text-xs sm:text-sm"
                         icon={faPlaneArrival}
                         onChange={(label, value) => {
                             setdestination({label:label, value:value});
@@ -76,12 +73,14 @@ export default function BookingCard({onSubmit, className=""}:Props) {
                 </div>
                 <div className="flex gap-1">
                     <CustomDatePicker
-                        className="rounded-full h-10"
+                        className="rounded-full h-8 lg:ml-36"
                         onChange={(value) => setDepartureDate(value)}
                     />
                 </div>
             </div>
-            <CustomButton type="submit" text="Show Flights" className="mt-4" />
+                <div className="flex justify-center sm:justify-start">
+                    <CustomButton type="submit" text="Show Flights" className="mt-4" />
+                </div>
         </form>
         {/*Modal for displaying error message*/}
       <WarningModal text={"Please fill in all required fields."} open={warning} setOpen={setWarning}/>
